@@ -9,6 +9,13 @@ class Board:
         print('-' * 11)
         print(self.__prettify_board_row(self._board[2]))
 
+    def get_cell_values(self):
+        cell_values = []
+        for row in range(0, 3):
+            for col in range(0, 3):
+                cell_values.append(self._board[row][col])
+        return cell_values
+
     def make_move(self, move_tuple, player_symbol):
         if self.__check_move_validity(move_tuple) and player_symbol in ['x', 'o']:
             self._board[move_tuple[0]][move_tuple[1]] = player_symbol
@@ -17,7 +24,7 @@ class Board:
 
     def check_game_complete_and_get_winner_symbol(self):
         for row in range(0, 3):
-            if self.__check_all_x_or_o(self._board[0]):
+            if self.__check_all_x_or_o(self._board[row]):
                 return True, self._board[row][0]
 
         for col in range(0, 3):
